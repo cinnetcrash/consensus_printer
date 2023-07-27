@@ -10,7 +10,7 @@ Channel
     .set { ch_fastq }
 
 process TrimAdapters {
-    container 'porechop_docker_image' // replace with the actual image name
+    container 'https://hub.docker.com/r/genomicpariscentre/porechop' // replace with the actual image name
 
     input:
     tuple val(sample_name), path(fastq) from ch_fastq
@@ -24,7 +24,7 @@ process TrimAdapters {
 }
 
 process AlignSort {
-    container 'minimap2_samtools_docker_image' // replace with the actual image name
+    container 'https://github.com/Niema-Docker/minimap2_samtools' // replace with the actual image name
 
     input:
     tuple val(sample_name), path(fastq) from ch_trimmed
@@ -39,7 +39,7 @@ process AlignSort {
 }
 
 process CallVariants {
-    container 'bcftools_docker_image' // replace with the actual image name
+    container 'https://hub.docker.com/r/biocontainers/bcftools' // replace with the actual image name
 
     input:
     tuple val(sample_name), path(bam), path(bai) from ch_sorted
@@ -54,7 +54,7 @@ process CallVariants {
 }
 
 process AlignmentStats {
-    container 'samtools_docker_image' // replace with the actual image name
+    container 'https://hub.docker.com/r/biocontainers/samtools/' // replace with the actual image name
 
     input:
     tuple val(sample_name), path(bam), path(bai) from ch_sorted
@@ -68,7 +68,7 @@ process AlignmentStats {
 }
 
 process GenerateConsensus {
-    container 'samtools_ivar_docker_image' // replace with the actual image name
+    container 'https://hub.docker.com/r/biocontainers/samtools/' // replace with the actual image name
 
     input:
     tuple val(sample_name), path(bam), path(bai) from ch_sorted
