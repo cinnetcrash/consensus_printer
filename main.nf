@@ -1,8 +1,8 @@
 #!/usr/bin/env nextflow
 
 params.reads = "$baseDir/*.fastq" // Input reads
-params.ref = "ref_gen/reference.fasta" // Reference genome
-params.outdir = "consensus_output_batch_1" // Output directory
+params.ref = "genomes/MN908947.3.fasta" // Reference genome
+params.outdir = "consensus_output" // Output directory
 
 Channel
     .fromPath(params.reads)
