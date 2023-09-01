@@ -3,6 +3,7 @@
 params.reads = "$baseDir/*.fastq" // Input reads
 params.ref = "genomes/MN908947.3.fasta" // Reference genome
 params.outdir = "consensus_output" // Output directory
+params.kraken_db = "kraken2_db_path"
 
 Channel
     .fromPath(params.reads)
@@ -19,7 +20,7 @@ process TrimAdapters {
     tuple val(sample_name), path("${sample_name}_trimmed.fastq") into ch_trimmed
 
     """
-    porechop -i $fastq -o ${sample_name}_trimmed.fastq
+    porechop -i $fastq -o ${sample_name}_trimmed.fastq --threads 14
     """
 }
 
