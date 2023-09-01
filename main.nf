@@ -77,6 +77,6 @@ process GenerateConsensus {
     path("${sample_name}_consensus.fasta") into ch_consensus
 
     """
-    samtools mpileup -aa -A -d 0 -Q 20 $bam | ivar consensus -p ${sample_name}_consensus.fasta -t 0.01 -q 8
+    samtools mpileup -aa -A -d 0 -Q 5 $bam | ivar consensus -p ${sample_name}_consensus.fasta -t 0.1 -q 5
     """
 }
